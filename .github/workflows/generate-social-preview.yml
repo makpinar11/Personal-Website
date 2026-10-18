@@ -2,6 +2,7 @@ name: Generate social sharing preview
 on:
   push:
     paths:
+      - 'assets/Portfolio-Banner.png'
       - 'assets/social-preview.svg'
       - '.github/workflows/generate-social-preview.yml'
   workflow_dispatch:
@@ -17,22 +18,43 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install image renderer
+      - name: Install SVG fallback renderer
+        if: ${{ hashFiles('assets/Portfolio-Banner.png') == '' }}
         run: python -m pip install --disable-pip-version-check cairosvg
-      - name: Render sharing image (1200 x 627)
+      - name: Prepare social preview
         run: |
           python - <<'PY'
-          import cairosvg
-          cairosvg.svg2png(url="assets/social-preview.svg", write_to="assets/social-preview.png", output_width=1200, output_height=627)
+          from pathlib import Path
+          import re
+
+          source = Path("assets/Portfolio-Banner.png")
+          target = Path("assets/social-preview.png")
+          html_path = Path("index.html")
+
+          if source.is_file():
+              # Use the uploaded image unchanged: no new design, cropping, or compression.
+              target.write_bytes(source.read_bytes())
+              width, height = 1734, 907
+              print("Using exact Portfolio-Banner.png bytes")
+          else:
+              import cairosvg
+              cairosvg.svg2png(url="assets/social-preview.svg", write_to=str(target), output_width=1200, output_height=627)
+              width, height = 1200, 627
+              print("Using SVG fallback")
+
+          html = html_path.read_text()
+          html = re.sub(r'content="\d+" property="og:image:width"', f'content="{width}" property="og:image:width"', html)
+          html = re.sub(r'content="\d+" property="og:image:height"', f'content="{height}" property="og:image:height"', html)
+          html_path.write_text(html)
           PY
-      - name: Publish generated image
+      - name: Publish preview and dimensions
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/social-preview.png
+          git add assets/social-preview.png index.html
           if git diff --cached --quiet; then
-            echo "Image already up to date"
+            echo "Preview already current"
             exit 0
           fi
-          git commit -m "Build LinkedIn-compatible social preview PNG"
+          git commit -m "Publish exact branded social preview"
           git push
