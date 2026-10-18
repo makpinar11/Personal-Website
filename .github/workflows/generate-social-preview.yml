@@ -1,0 +1,38 @@
+name: Generate social sharing preview
+on:
+  push:
+    paths:
+      - 'assets/social-preview.svg'
+      - '.github/workflows/generate-social-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out portfolio
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image renderer
+        run: python -m pip install --disable-pip-version-check cairosvg
+      - name: Render sharing image (1200 x 627)
+        run: |
+          python - <<'PY'
+          import cairosvg
+          cairosvg.svg2png(url="assets/social-preview.svg", write_to="assets/social-preview.png", output_width=1200, output_height=627)
+          PY
+      - name: Publish generated image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/social-preview.png
+          if git diff --cached --quiet; then
+            echo "Image already up to date"
+            exit 0
+          fi
+          git commit -m "Build LinkedIn-compatible social preview PNG"
+          git push
