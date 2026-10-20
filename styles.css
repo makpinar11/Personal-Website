@@ -102,3 +102,15 @@ a.btn.contact-link{gap:10px}
 @media(max-width:1350px){.header-actions .social-nav-link{width:39px;padding:0}.social-nav-label{display:none}}
 @media(max-width:680px){.header-inner{gap:8px}.header-actions{gap:5px}.header-actions .social-nav-link{width:35px;height:36px}.header-actions .theme-toggle,.header-actions .nav-toggle{width:36px;height:36px}}
 @media(max-width:360px){.brand-copy{display:none}}
+
+
+/* v14: three matching header buttons. Explicit SVG dimensions prevent oversized icons. */
+.contact-icon{display:inline-block;width:16px;height:16px;max-width:16px;max-height:16px;flex:0 0 16px;vertical-align:middle}
+.header-actions{gap:8px;flex-shrink:0}
+.header-actions .header-pill{box-sizing:border-box;min-height:39px;height:39px;width:auto;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--text);display:inline-flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:740;line-height:1;white-space:nowrap;transition:background .2s,border-color .2s,color .2s}
+.header-actions .header-pill svg.contact-icon{display:block;width:16px;height:16px;max-width:16px;max-height:16px;min-width:16px;min-height:16px;flex:0 0 16px}
+.header-actions .header-pill .pill-label{display:inline;font-size:12px;line-height:1;white-space:nowrap}
+.header-actions .header-pill:hover{background:var(--surface-raised);color:var(--accent);border-color:var(--accent)}
+@media(max-width:1450px){.header-actions .header-pill{width:39px;min-width:39px;padding:0}.header-actions .header-pill .pill-label{display:none}}
+@media(max-width:1120px){.header-inner{gap:12px}.brand{margin-right:auto}.primary-nav{position:absolute;left:0;right:0;top:calc(100% - 1px);display:none;flex-direction:column;align-items:stretch;gap:0;margin:0;background:var(--header-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:12px 22px 21px}.primary-nav.is-open{display:flex}.primary-nav a{padding:12px 16px;font-size:14px;border-bottom:1px solid var(--line-soft)}.nav-toggle{display:flex}}
+@media(max-width:680px){.header-inner{gap:8px}.brand-copy{display:none}.header-actions{gap:5px}.header-actions .header-pill{min-width:35px;width:35px;min-height:36px;height:36px;padding:0}.header-actions .theme-toggle,.header-actions .nav-toggle{width:36px;height:36px}}
