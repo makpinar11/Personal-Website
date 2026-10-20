@@ -90,3 +90,15 @@ body{overflow-x:clip}main{overflow-x:clip}
 .ncca-mini-note{font-size:11px;color:var(--muted);line-height:1.7;margin-top:14px}
 @media(max-width:900px){.featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-grid .featured-card:nth-child(3){grid-column:auto}.featured-card:nth-child(3) .featured-visual{max-width:none}.ncca-impact-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.featured-grid{grid-template-columns:1fr}.ncca-impact-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ncca-inline-figure{overflow-x:auto}.ncca-inline-figure img{width:100%;min-width:480px}}
+
+
+/* v13: consistent, accessible LinkedIn and email controls across all pages. */
+.contact-icon{width:17px;height:17px;display:inline-block;flex:0 0 17px}
+a.contact-link{display:inline-flex;align-items:center;gap:7px}
+a.btn.contact-link{gap:10px}
+.header-actions .social-nav-link{height:39px;padding:0 11px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--text);font-size:12px;font-weight:740;white-space:nowrap;transition:background .2s,border-color .2s,color .2s}
+.header-actions .social-nav-link:hover{color:var(--accent);background:var(--surface-raised);border-color:var(--accent)}
+.social-nav-link .contact-icon{width:17px;height:17px;flex-basis:17px}
+@media(max-width:1350px){.header-actions .social-nav-link{width:39px;padding:0}.social-nav-label{display:none}}
+@media(max-width:680px){.header-inner{gap:8px}.header-actions{gap:5px}.header-actions .social-nav-link{width:35px;height:36px}.header-actions .theme-toggle,.header-actions .nav-toggle{width:36px;height:36px}}
+@media(max-width:360px){.brand-copy{display:none}}
