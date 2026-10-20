@@ -74,3 +74,19 @@ body{overflow-x:clip}main{overflow-x:clip}
 .profile-panel-link:hover{color:var(--accent-strong);border-color:var(--accent-strong)}
 @media(max-width:1100px) and (min-width:681px){.profile-panel{grid-template-columns:115px minmax(0,1fr);gap:13px;padding:10px}.profile-panel-copy strong{font-size:17px}.profile-panel-link{margin-top:5px}}
 @media(max-width:400px){.profile-panel{grid-template-columns:118px minmax(0,1fr);gap:13px;padding:10px}.profile-panel-copy strong{font-size:17px}.profile-panel-role{font-size:11px}.profile-panel-link{font-size:11px;margin-top:6px}}
+
+/* Version 12: NCCA case study — preserves the existing visual language. */
+.featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.featured-grid .featured-card:nth-child(3){grid-column:auto}
+.featured-card.featured-ncca .schematic{background:radial-gradient(circle at 50% 50%,rgba(38,183,152,.12),transparent 75%),repeating-linear-gradient(90deg,transparent 0 35px,rgba(82,160,174,.035) 36px),var(--bg-soft)}
+.ncca-impact-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:4px 0 8px}
+.ncca-impact{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface)}
+.ncca-impact strong{display:block;font-size:clamp(20px,2.2vw,30px);font-weight:820;letter-spacing:-.05em;color:var(--accent)}
+.ncca-impact span{display:block;font-size:11px;line-height:1.55;color:var(--text-soft);margin-top:5px}
+.ncca-inline-figure{margin:28px 0 10px;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:#0d1e2a}
+.ncca-inline-figure img{width:100%;height:auto;display:block}
+.ncca-inline-figure figcaption{padding:13px 19px;font-size:11px;line-height:1.7;border-top:1px solid var(--line);background:var(--surface);color:var(--text-soft)}
+.ncca-inline-figure figcaption strong{color:var(--accent)}
+.ncca-mini-note{font-size:11px;color:var(--muted);line-height:1.7;margin-top:14px}
+@media(max-width:900px){.featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-grid .featured-card:nth-child(3){grid-column:auto}.featured-card:nth-child(3) .featured-visual{max-width:none}.ncca-impact-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.featured-grid{grid-template-columns:1fr}.ncca-impact-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ncca-inline-figure{overflow-x:auto}.ncca-inline-figure img{width:100%;min-width:480px}}
